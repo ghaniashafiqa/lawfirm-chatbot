@@ -1,52 +1,58 @@
 <template>
   <aside
     id="sidebar"
-    class="w-64 h-screen sticky top-0 bg-primary text-white flex flex-col justify-between overflow-y-auto z-30 shadow-xl"
+    class="w-64 h-screen sticky top-0 bg-[#1F2937] text-white flex flex-col justify-between overflow-y-auto z-30 shadow-2xl"
   >
     <!-- Logo -->
     <div class="px-6 py-6 flex flex-col items-center border-b border-white/10">
       <div
         @click="goToDashboard"
-        class="cursor-pointer transform hover:scale-105 transition duration-200"
+        class="cursor-pointer hover:scale-105 transition-transform duration-300"
       >
-        <img src="@/assets/logo-lawfirm.png" alt="Law Firm Logo" class="h-14 w-auto mb-2" />
+        <img
+          src="@/assets/logo-lawfirm.png"
+          alt="Law Firm Logo"
+          class="h-12 w-auto mb-3 rounded-md shadow-md"
+        />
       </div>
-      <span class="font-serif text-lg font-semibold">Hukum<span class="text-yellow-300">Cerdas</span></span>
+      <span class="text-xl font-semibold tracking-wide">
+        <span class="text-yellow-400"></span>
+      </span>
     </div>
 
     <!-- Navigation -->
-    <nav class="flex-1 px-4 py-6 space-y-1">
-      <ul>
+    <nav class="flex-1 px-5 py-6 space-y-2">
+      <ul class="space-y-1">
         <li v-for="item in menuItems" :key="item.name">
           <button
             @click="item.action"
-            class="group w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/10 text-sm font-medium transition relative"
+            class="group w-full flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium hover:bg-white/10 transition-all duration-200 relative"
           >
-            <div class="absolute left-0 h-full w-1 bg-yellow-300 rounded-r-lg opacity-0 group-hover:opacity-100"></div>
-            <component :is="item.icon" class="w-5 h-5 text-yellow-300" />
-            <span>{{ item.name }}</span>
+            <div class="absolute left-0 h-full w-1 bg-yellow-400 rounded-r-lg opacity-0 group-hover:opacity-100"></div>
+            <component :is="item.icon" class="w-5 h-5 text-yellow-400" />
+            <span class="text-white/90 group-hover:text-white">{{ item.name }}</span>
           </button>
         </li>
       </ul>
     </nav>
 
-    <!-- Bottom User Info -->
+    <!-- User Info -->
     <div class="p-4 border-t border-white/10">
-      <div class="flex items-center mb-3">
+      <div class="flex items-center mb-4">
         <div class="relative">
-          <div class="w-10 h-10 rounded-full bg-yellow-300 text-primary flex items-center justify-center font-bold">
+          <div class="w-10 h-10 rounded-full bg-yellow-400 text-primary flex items-center justify-center font-bold shadow-inner">
             {{ userInitials }}
           </div>
-          <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-primary"></span>
+          <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-[#1F2937]"></span>
         </div>
         <div class="ml-3">
-          <p class="text-sm font-semibold">{{ authStore.user?.username || 'Admin' }}</p>
-          <p class="text-xs text-white/70">{{ authStore.user?.role || 'Super Admin' }}</p>
+          <p class="text-sm font-semibold text-white">{{ authStore.user?.username || 'Admin' }}</p>
+          <p class="text-xs text-white/60">{{ authStore.user?.role || 'Super Admin' }}</p>
         </div>
       </div>
       <button
         @click="confirmLogout"
-        class="w-full bg-red-600 hover:bg-red-700 text-white text-sm font-medium px-4 py-2 rounded-md transition"
+        class="w-full bg-red-500 hover:bg-red-600 text-white text-sm font-medium px-4 py-2 rounded-md transition"
       >
         Logout
       </button>
