@@ -149,7 +149,7 @@ async function handleUpload() {
   formData.append('description', description.value)
 
   try {
-    const res = await axios.post('http://localhost:5000/kb/upload', formData)
+    const res = await axios.post('https://lawfirm-chatbot-production.up.railway.app/kb/upload', formData)
     console.log(res.data)
 
     await fetchDocuments()
@@ -164,7 +164,7 @@ async function handleUpload() {
 async function fetchDocuments() {
   loading.value = true
   try {
-    const res = await axios.get("http://localhost:5000/kb/get-data")
+    const res = await axios.get("https://lawfirm-chatbot-production.up.railway.app/kb/get-data")
     documents.value = res.data.map((d) => ({
       name: d.payload?.source || "Unknown",
       description: d.payload?.description || "No description",
@@ -189,7 +189,7 @@ async function handleSearch() {
   isSearching.value = true
   loading.value = true
   try {
-    const res = await axios.get(`http://localhost:5000/kb/search-data?q=${encodeURIComponent(searchQuery.value)}`)
+    const res = await axios.get(`https://lawfirm-chatbot-production.up.railway.app/kb/search-data?q=${encodeURIComponent(searchQuery.value)}`)
     documents.value = res.data.map((d) => ({
       name: d.payload?.source || "Unknown",
       description: d.payload?.description || "No description",

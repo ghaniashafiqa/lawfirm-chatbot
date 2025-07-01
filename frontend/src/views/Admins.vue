@@ -293,7 +293,7 @@ async function fetchAdmins() {
     loading.value = true
     error.value = null
     
-    const response = await fetch('http://localhost:5000/admin', {
+    const response = await fetch('https://lawfirm-chatbot-production.up.railway.app/admin', {
       headers: {
         'Authorization': `Bearer ${authStore.token}`
       }
@@ -381,10 +381,10 @@ async function saveAdmin() {
     }
     
     if (isEditing.value) {
-      url = `http://localhost:5000/admin/${form.value.id}`
+      url = `https://lawfirm-chatbot-production.up.railway.app/admin/${form.value.id}`
       method = 'PUT'
     } else {
-      url = 'http://localhost:5000/admin'
+      url = 'https://lawfirm-chatbot-production.up.railway.app/admin'
       method = 'POST'
       // For new admin, password is required
       if (!form.value.password) {
@@ -432,7 +432,7 @@ async function deleteAdmin() {
   if (!adminToDelete.value) return
   
   try {
-    const response = await fetch(`http://localhost:5000/admin/${adminToDelete.value.id}`, {
+    const response = await fetch(`https://lawfirm-chatbot-production.up.railway.app/admin/${adminToDelete.value.id}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${authStore.token}`

@@ -127,7 +127,7 @@ async function fetchChatHistory() {
     loading.value = true
     error.value = null
 
-    const response = await fetch('http://localhost:5000/history', {
+    const response = await fetch('https://lawfirm-chatbot-production.up.railway.app/history', {
       headers: {
         'Authorization': `Bearer ${authStore.token}`
       }
