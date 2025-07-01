@@ -8,15 +8,15 @@ history_bp = Blueprint('history', __name__, url_prefix='/history')
 @history_bp.route('', methods=['GET'])
 @jwt_required()
 def list_history():
-    """Admin: list all chat sessions with optional filtering."""
     sessions = ChatHistory.query.order_by(ChatHistory.created_at.desc()).all()
     return jsonify([
         {
-            "id":     h.id,
+            "id": h.id,
             "session_id": h.session_id,
-            "question":   h.question,
-            "answer":     h.answer,
-            "created_at": h.created_at.isoformat()
+            "question": h.question,
+            "answer": h.answer,
+            "created_at": h.created_at.isoformat(),
+            "feedback": h.feedbacks[0].is_positive if h.feedbacks else None
         }
         for h in sessions
     ])

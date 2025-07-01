@@ -1,4 +1,4 @@
-import os
+import os 
 from datetime import timedelta
 
 class Config:
@@ -8,5 +8,5 @@ class Config:
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=2)
     QDRANT_URL = os.getenv("QDRANT_URL")
     QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
-    COLLECTION_NAME = os.getenv("COLLECTION_NAME")
-    DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
+    COLLECTION_NAME = os.getenv("COLLECTION_NAME", "gebukmantan_posts_recursive")
+    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
