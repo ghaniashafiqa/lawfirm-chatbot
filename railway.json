@@ -1,9 +1,0 @@
-{
-  "build": {
-    "builder": "NIXPACKS",
-    "nixpacksConfigPath": "backend/nixpacks.toml"
-  },
-  "deploy": {
-    "startCommand": "cd backend && gunicorn run:app"
-  }
-}
