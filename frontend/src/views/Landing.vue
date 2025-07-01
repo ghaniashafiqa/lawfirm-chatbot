@@ -14,7 +14,7 @@
         <span class="text-primary">Information & Assistance</span>
       </h1>
       <p class="text-lg text-gray-700 mb-8 leading-relaxed">
-        Get access to document-based legal information and case support related to land ownership and <strong>mafia tanah</strong> issues — powered by Retrieval-Augmented Generation and trusted archives from SAP Lawfirm.
+        Get access to document-based legal information and case support related to land ownership and <strong>mafia tanah</strong> issues, powered by Retrieval-Augmented Generation and trusted archives from SAP Lawfirm.
       </p>
       <router-link to="/chat">
         <button
@@ -52,7 +52,7 @@
         Hukum Cerdas is an AI-powered legal assistant developed in collaboration with <strong>SAP Lawfirm</strong> and <strong>Gebukmantan.com</strong> to support legal professionals and the public in understanding and preventing land mafia cases. 
       </p>
       <p class="text-gray-700 leading-relaxed">
-        Using Retrieval-Augmented Generation (RAG), this chatbot retrieves trusted legal documents and provides contextual answers without memorizing data — ensuring accuracy, transparency, and compliance.
+        Using Retrieval-Augmented Generation (RAG), this chatbot retrieves trusted legal documents and provides contextual answers without memorizing data, ensuring accuracy, transparency, and compliance.
       </p>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -68,7 +68,7 @@
 <section id="features" class="min-h-screen py-24 px-6 bg-[#f9f6f4]">
   <div class="max-w-7xl mx-auto text-center mb-16">
     <h2 class="text-4xl font-serif font-bold text-neutral-900">Key Capabilities</h2>
-    <p class="text-lg text-gray-600 mt-4">Powered by OpenAI/DeepSeek + trusted legal documents from SAP Lawfirm.</p>
+    <p class="text-lg text-gray-600 mt-4">Powered by OpenAI + trusted legal documents from SAP Lawfirm.</p>
   </div>
 
   <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -77,7 +77,7 @@
       <img src="@/assets/feature-docs.png" alt="Document Retrieval" class="w-full h-64 object-cover" />
       <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex flex-col justify-end">
         <h3 class="text-white text-xl font-semibold mb-2">Document Retrieval</h3>
-        <p class="text-sm text-white/80">Find answers from legal sources — no hallucinations, no guesswork.</p>
+        <p class="text-sm text-white/80">Find answers from legal sources, no hallucinations, no guesswork.</p>
       </div>
     </div>
 
@@ -110,7 +110,7 @@
       Get Legal Answers<br class="hidden md:block" />Based on Trusted Documents
     </h2>
     <p class="text-lg text-white/90 mb-8">
-      Hukum Cerdas uses OpenAI/DeepSeek with RAG to guide you through land disputes, document needs, and public legal resources — not legal advice.
+      Hukum Cerdas uses OpenAI with RAG to guide you through land disputes, document needs, and public legal resources, not legal advice.
     </p>
     <router-link to="/chat">
       <button class="inline-flex items-center gap-2 px-8 py-3 bg-accent text-primary text-lg font-semibold rounded-md hover:bg-yellow-500 transition shadow-lg">
