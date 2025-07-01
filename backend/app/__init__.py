@@ -35,4 +35,9 @@ def create_app():
     app.register_blueprint(admin_bp)
     app.register_blueprint(analytics_bp)
 
+    # Tambahkan route /
+    @app.route('/')
+    def index():
+        return '✅ Hukum Cerdas Backend is running.'
+
     return app
