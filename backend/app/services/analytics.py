@@ -33,10 +33,10 @@ class AnalyticsService:
     @staticmethod
     def total_documents():
         """Return total number of points in the Qdrant collection."""
-        client = QdrantClient(url=Config.QDRANT_URL, api_key=Config.QDRANT_API_KEY)
-        info = client.get_collections().collections
-        for col in info:
-            if col.name == "law_docs":
-                # Newer Qdrant Python returns col.vectors_count
-                return getattr(col, "vectors_count", getattr(col, "points_count", 0))
-        return 0
+        try:
+            client = QdrantClient(url=Config.QDRANT_URL, api_key=Config.QDRANT_API_KEY)
+            collection_info = client.get_collection(Config.COLLECTION_NAME)
+            return collection_info.points_count
+        except Exception as e:
+            print(f"Error getting document count: {e}")
+            return 0
