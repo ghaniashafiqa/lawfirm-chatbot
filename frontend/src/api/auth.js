@@ -9,10 +9,19 @@ export const useAuthStore = defineStore('auth', {
   }),
   actions: {
     async login(credentials) {
-      const { data } = await api.post('/auth/login', credentials);
-      this.token = data.access_token;
-      localStorage.setItem('token', this.token);
-      this.user = parseJwt(this.token)
+      const { data } = await api.post('/auth/login', credentials)
+      this.token = data.access_token
+      localStorage.setItem('token', this.token)
+
+      // 🟢 Fetch full user profile
+      const profileRes = await api.get('/auth/me', {
+        headers: {
+          Authorization: `Bearer ${this.token}`
+        }
+      })
+
+      this.user = profileRes.data
+      localStorage.setItem('user', JSON.stringify(this.user))
     },
     logout() {
       this.token = '';
