@@ -1,37 +1,41 @@
 // src/views/Dashboard.vue
 <template>
-  <div class="p-8 min-h-screen bg-neutralbg">
+  <div class="px-6 py-10 min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-100">
     <!-- Header -->
-    <div class="mb-6">
-      <h1 class="text-3xl font-serif font-bold text-primary drop-shadow-sm">Dashboard</h1>
-      <p class="text-gray-600">Welcome back, Admin. Monitor activity and manage legal resources.</p>
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold text-gray-800 tracking-tight mb-1">Welcome back, <span class="text-primary">Admin</span></h1>
+      <p class="text-gray-500 text-sm">Monitor activity and manage legal resources efficiently.</p>
     </div>
 
     <!-- Stat Cards -->
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
-      <div class="p-6 bg-white rounded-xl border border-gray-200 shadow hover:shadow-md transition">
-        <p class="text-xs text-gray-500 uppercase mb-2 tracking-wide">Questions Asked</p>
-        <h2 class="text-3xl font-extrabold text-primary mb-1">{{ questionsThisWeek }}</h2>
-        <p class="text-sm text-gray-400">This week</p>
-      </div>
-
-      <div class="p-6 bg-white rounded-xl border border-gray-200 shadow hover:shadow-md transition">
-        <p class="text-xs text-gray-500 uppercase mb-2 tracking-wide">Users per Day</p>
-        <h2 class="text-3xl font-extrabold text-primary mb-1">{{ usersPerDayAvg }}</h2>
-        <p class="text-sm text-gray-400">Daily Average</p>
-      </div>
-
-      <div class="p-6 bg-white rounded-xl border border-gray-200 shadow hover:shadow-md transition">
-        <p class="text-xs text-gray-500 uppercase mb-2 tracking-wide">Base Knowledge</p>
-        <h2 class="text-3xl font-extrabold text-primary mb-1">{{ totalDocuments }}</h2>
-        <p class="text-sm text-gray-400">Total Documents</p>
-      </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+      <DashboardCard
+        title="Questions Asked"
+        :value="questionsThisWeek"
+        subtitle="This week"
+        icon="📝"
+        bg="bg-gradient-to-r from-yellow-100 to-yellow-200"
+      />
+      <DashboardCard
+        title="Users per Day"
+        :value="usersPerDayAvg"
+        subtitle="Daily Average"
+        icon="👥"
+        bg="bg-gradient-to-r from-blue-100 to-blue-200"
+      />
+      <DashboardCard
+        title="Base Knowledge"
+        :value="totalDocuments"
+        subtitle="Total Documents"
+        icon="📚"
+        bg="bg-gradient-to-r from-emerald-100 to-emerald-200"
+      />
     </div>
 
     <!-- Chart Section -->
-    <div class="bg-white rounded-xl shadow border border-gray-200 p-6 mb-10">
+    <div class="bg-white rounded-2xl shadow-md p-6 mb-10 border border-gray-100">
       <h2 class="text-xl font-semibold text-primary mb-4">Chatbot Responses in the Last 7 Days</h2>
-      <div v-if="last7DaysCounts.every(cnt => cnt === 0)" class="text-center text-gray-500 py-10">
+      <div v-if="last7DaysCounts.every(cnt => cnt === 0)" class="text-center text-gray-500 py-16">
         <p class="text-lg font-medium">No activity data available.</p>
       </div>
       <div v-else>
@@ -40,17 +44,17 @@
     </div>
 
     <!-- FAQ Section -->
-    <div class="bg-white rounded-xl shadow border border-gray-200 p-6">
+    <div class="bg-white rounded-2xl shadow-md border border-gray-100 p-6">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
         <div>
-          <h2 class="text-2xl font-serif font-bold text-primary">FAQs</h2>
+          <h2 class="text-2xl font-bold text-gray-800">FAQs</h2>
           <p class="text-gray-500 text-sm">Frequently asked legal questions from chatbot sessions</p>
         </div>
         <button
           @click="openModal"
-          class="mt-4 sm:mt-0 inline-flex items-center px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-md shadow transition"
+          class="mt-4 sm:mt-0 inline-flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-md shadow transition"
         >
-          + Add FAQ
+          <span>➕</span> Add FAQ
         </button>
       </div>
 
@@ -61,10 +65,10 @@
         <div
           v-for="(item, idx) in faqData"
           :key="idx"
-          class="bg-accentSoft border border-accent rounded-lg p-5 shadow-sm"
+          class="rounded-xl p-5 bg-gradient-to-br from-white to-gray-50 border border-gray-200 shadow-sm hover:shadow-md transition"
         >
-          <h3 class="text-lg font-semibold text-primary mb-2">{{ item.question }}</h3>
-          <p class="text-sm text-gray-700">{{ item.answer }}</p>
+          <h3 class="text-lg font-semibold text-gray-800 mb-1">{{ item.question }}</h3>
+          <p class="text-sm text-gray-600">{{ item.answer }}</p>
         </div>
       </div>
     </div>
@@ -73,9 +77,9 @@
     <transition name="modal-fade">
       <div
         v-show="isModalOpen"
-        class="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50"
+        class="fixed inset-0 bg-black/40 backdrop-blur-sm flex justify-center items-center z-50"
       >
-        <div class="bg-white rounded-xl p-8 w-full max-w-lg shadow-xl max-h-[90vh] overflow-y-auto">
+        <div class="bg-white rounded-2xl p-8 w-full max-w-lg shadow-xl max-h-[90vh] overflow-y-auto">
           <h2 class="text-xl font-bold text-primary mb-4">Add New FAQ</h2>
           <form @submit.prevent="addFaq" class="space-y-4">
             <div>
@@ -83,7 +87,7 @@
               <input
                 v-model="newFaq.question"
                 type="text"
-                class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary"
+                class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:outline-none"
                 placeholder="e.g., Apa itu mafia tanah?"
               />
             </div>
@@ -92,7 +96,7 @@
               <textarea
                 v-model="newFaq.answer"
                 rows="4"
-                class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary"
+                class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:outline-none"
                 placeholder="Tuliskan jawaban hukum..."
               ></textarea>
             </div>
@@ -123,8 +127,12 @@
 import Chart from 'chart.js/auto'
 import Swal from 'sweetalert2'
 import api from '@/api/axios'
+import DashboardCard from '@/components/DashboardCard.vue'
 
 export default {
+  components: {
+    DashboardCard
+  },
   data() {
     return {
       questionsThisWeek: 0,
