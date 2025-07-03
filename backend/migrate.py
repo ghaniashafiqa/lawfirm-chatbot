@@ -1,13 +1,13 @@
 from app import create_app
-from alembic import command
+from app.db import db
 from alembic.config import Config
+from alembic import command
 import os
 
 app = create_app()
 
 with app.app_context():
-    print("🔧 Running Alembic migrations...")
-    cfg_path = os.path.join(os.path.dirname(__file__), 'alembic.ini')
-    print("📄 Alembic config path:", cfg_path)
-    alembic_cfg = Config(cfg_path)
+    print("✅ App context started")
+    alembic_cfg = Config("alembic.ini")
     command.upgrade(alembic_cfg, "head")
+    print("✅ Migration complete")

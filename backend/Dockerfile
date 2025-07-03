@@ -1,24 +1,18 @@
-FROM python:3.10-slim
+# Dockerfile
+FROM python:3.11-slim
 
+# Set working directory
 WORKDIR /app
 
 # Install dependencies
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    gcc \
-    libpq-dev \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install Python deps
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy backend app
+# Copy app
 COPY . .
 
 # Expose port
 EXPOSE 5000
 
-# Run Gunicorn
+# Run the app
 CMD ["python", "run.py"]
