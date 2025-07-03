@@ -23,7 +23,12 @@ def create_app():
 
     db.init_app(app)
     Migrate(app, db)
-    CORS(app, resources={r"/*": {"origins": ["https://lawfirm-chatbot.vercel.app"]}}, supports_credentials=True)
+    CORS(app,
+        origins=["https://lawfirm-chatbot.vercel.app"],
+        supports_credentials=True,
+        methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        allow_headers=["Content-Type", "Authorization"]
+    )
 
     jwt.init_app(app)
 
