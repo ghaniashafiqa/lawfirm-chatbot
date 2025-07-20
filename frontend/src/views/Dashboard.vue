@@ -44,7 +44,7 @@
     </div>
 
     <!-- FAQ Section -->
-    <div class="bg-white rounded-2xl shadow-md border border-gray-100 p-6">
+    <!-- <div class="bg-white rounded-2xl shadow-md border border-gray-100 p-6">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
         <div>
           <h2 class="text-2xl font-bold text-gray-800">FAQs</h2>
@@ -71,10 +71,10 @@
           <p class="text-sm text-gray-600">{{ item.answer }}</p>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Modal -->
-    <transition name="modal-fade">
+    <!-- <transition name="modal-fade">
       <div
         v-show="isModalOpen"
         class="fixed inset-0 bg-black/40 backdrop-blur-sm flex justify-center items-center z-50"
@@ -118,7 +118,7 @@
           </form>
         </div>
       </div>
-    </transition>
+    </transition> -->
   </div>
 </template>
 
@@ -139,7 +139,7 @@ export default {
       usersPerDayAvg: 0,
       totalDocuments: 0,
       chatData: [],
-      faqData: [],
+      // faqData: [],
       chart: null,
       isModalOpen: false,
       newFaq: { question: '', answer: '' },
@@ -150,7 +150,7 @@ export default {
   mounted() {
     this.fetchQuestions();
     this.fetchChatData();
-    this.fetchFaqData();
+    // this.fetchFaqData();
   },
   methods: {
     async fetchQuestions() {
@@ -193,18 +193,18 @@ export default {
         options:{ responsive:true, plugins:{ legend:{ display:false } }, scales:{ y:{ beginAtZero:true, ticks:{ precision:0 } } } }
       })
     },
-    async fetchFaqData() {
-      const res = await api.get('/faq')
-      this.faqData = res.data
-    },
-    async addFaq() {
-      await api.post('/faq', this.newFaq)
-      Swal.fire('Success','FAQ added','success')
-      this.fetchFaqData(); this.closeModal()
-      this.newFaq={question:'',answer:''}
-    },
-    openModal(){this.isModalOpen=true},
-    closeModal(){this.isModalOpen=false}
+    // async fetchFaqData() {
+    //   const res = await api.get('/faq')
+    //   this.faqData = res.data
+    // },
+    // async addFaq() {
+    //   await api.post('/faq', this.newFaq)
+    //   Swal.fire('Success','FAQ added','success')
+    //   this.fetchFaqData(); this.closeModal()
+    //   this.newFaq={question:'',answer:''}
+    // },
+    // openModal(){this.isModalOpen=true},
+    // closeModal(){this.isModalOpen=false}
   }
 }
 </script>

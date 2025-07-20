@@ -36,41 +36,24 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
 
+const faqs = ref([])
 const activeIndex = ref(null)
 
 function toggle(index) {
   activeIndex.value = activeIndex.value === index ? null : index
 }
 
-const faqs = [
-  {
-    question: 'Apakah chatbot ini bisa menggantikan pengacara?',
-    answer:
-      'Tidak. Chatbot ini hanya memberikan informasi dari dokumen hukum terpercaya. Untuk tindakan hukum atau konsultasi lanjutan, silakan hubungi pengacara profesional seperti tim dari SAP Lawfirm.',
-  },
-  {
-    question: 'Apa itu RAG (Retrieval-Augmented Generation)?',
-    answer:
-      'RAG adalah pendekatan AI yang mencari informasi dari dokumen eksternal dan menggunakannya untuk menjawab pertanyaan. Chatbot ini menggunakan RAG dengan OpenAI atau DeepSeek, bukan model yang di-finetune.',
-  },
-  {
-    question: 'Apakah jawaban chatbot ini legal dan akurat?',
-    answer:
-      'Jawaban bersumber dari dokumen hukum resmi yang disediakan oleh SAP Lawfirm. Namun, chatbot tidak menjamin keakuratan 100% dan tidak dapat digunakan sebagai dasar keputusan hukum final.',
-  },
-  {
-    question: 'Apa saja topik yang bisa ditanyakan?',
-    answer:
-      'Topik seperti sengketa tanah, mafia tanah, dokumen kepemilikan, proses balik nama, hingga pencegahan penipuan tanah. Pertanyaan akan dijawab berdasarkan isi dokumen hukum terkait.',
-  },
-  {
-    question: 'Bagaimana cara menghubungi pengacara jika butuh bantuan lanjutan?',
-    answer:
-      'Anda dapat menghubungi SAP Lawfirm melalui website resmi di https://saplawfirm.com atau melalui halaman kontak kami.',
-  },
-]
+onMounted(async () => {
+  try {
+    const res = await axios.get('https://lawfirm-chatbot-production.up.railway.app/faq')
+    faqs.value = res.data
+  } catch (error) {
+    console.error('Failed to fetch FAQs:', error)
+  }
+})
 </script>
 
 <style scoped>

@@ -14,6 +14,7 @@ from .routes.faq import faq_bp
 from .routes.history import history_bp
 from .routes.admin import admin_bp
 from .routes.analytics import analytics_bp
+from .routes.bot_greeting import bot_bp
 
 jwt = JWTManager()
 
@@ -25,6 +26,7 @@ def create_app():
     Migrate(app, db)
     CORS(app,
         origins=["https://lawfirm-chatbot.vercel.app"],
+        # origins=["http://localhost:5173"],
         supports_credentials=True,
         methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         allow_headers=["Content-Type", "Authorization"]
@@ -40,10 +42,11 @@ def create_app():
     app.register_blueprint(history_bp)
     app.register_blueprint(admin_bp)
     app.register_blueprint(analytics_bp)
+    app.register_blueprint(bot_bp)
 
     # Tambahkan route /
     @app.route('/')
     def index():
-        return '✅ Hukum Cerdas Backend is running.'
+        return 'Hukum Cerdas Backend is running.'
 
     return app

@@ -12,6 +12,7 @@ import KnowledgeBase from '@/views/KnowledgeBase.vue'
 import ChatHistory from '@/views/ChatHistory.vue'
 import Admins from '@/views/Admins.vue'
 import FAQAdmin from '@/views/FAQAdmin.vue'
+import BotGreetingsAdmin from '../views/BotGreetingsAdmin.vue'
 import Settings from '@/views/Settings.vue'
 
 // Chat View (Public)
@@ -27,6 +28,7 @@ const routes = [
   { path: '/chat-history', name: 'ChatHistory',   component: ChatHistory,    meta: { requiresAuth: true } },
   { path: '/admin',        name: 'Admins',        component: Admins,         meta: { requiresAuth: true } },
   { path: '/faq-admin',    name: 'FAQAdmin',      component: FAQAdmin,       meta: { requiresAuth: true } },
+  { path: '/bot-greetings', name: 'BotGreetingsAdmin', component: BotGreetingsAdmin, meta: { requiresAuth: true} },
   { path: '/settings',     name: 'Settings',      component: Settings,       meta: { requiresAuth: true } },
 
   // Chatbot (public)
